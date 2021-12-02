@@ -1,10 +1,24 @@
 import { readFileSync } from 'fs'
 
+/**
+ * Read all lines in the specified file.
+ * @param filename The path to the file to be read.
+ * @returns A list of all lines in the file.
+ */
 export function readInput(filename: string): string[] {
   return readFileSync(filename, 'utf8').split('\n')
 }
 
-export function calculateNumberOfDepthIncreases(depthMeasurements: string[]): number {
+/**
+ * Calculate the number of depth increases in an ordered list of depth measurements.
+ *
+ * You can optionally provide the size of the sliding window to use in order to average measurements (the default is 1).
+ *
+ * @param depthMeasurements The list of depth measurements to calculate the number of depth increases for.
+ * @param windowSize The size of the sliding window to use when averaging measurements.
+ * @returns The number of depth increases in the list of measurements.
+ */
+export function calculateNumberOfDepthIncreases(depthMeasurements: string[], windowSize: number = 1): number {
   let numberOfDepthIncreases = 0
 
   depthMeasurements.forEach((line, currentIndex, lines) => {
