@@ -46,7 +46,7 @@ function calculateSumForWindow(measurements: string[]): number {
 const input = readInput('day1/input.txt')
 
 const numDepthIncreasesWindowSize1 = calculateNumberOfDepthIncreases(input)
-console.log('Number of depth increases with windows size of 1: %d', numDepthIncreasesWindowSize1)
+console.log('Number of depth increases with window size of 1: %d', numDepthIncreasesWindowSize1)
 
 const numDepthIncreasesWindowSize3 = calculateNumberOfDepthIncreases(input, 3)
-console.log('Number of depth increases with windows size of 3: %d', numDepthIncreasesWindowSize3)
+console.log('Number of depth increases with window size of 3: %d', numDepthIncreasesWindowSize3)
