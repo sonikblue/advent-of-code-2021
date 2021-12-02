@@ -22,12 +22,13 @@ export function calculateNumberOfDepthIncreases(depthMeasurements: string[], win
   let numberOfDepthIncreases = 0
 
   depthMeasurements.forEach((line, currentIndex, lines) => {
+    // No previous value to compare against.
     if (currentIndex === 0) {
       return
     }
 
-    const currentDepth = parseInt(line)
-    const previousDepth = parseInt(lines[currentIndex - 1])
+    const currentDepth = calculateSumForWindow(getWindow(lines, currentIndex, windowSize))
+    const previousDepth = calculateSumForWindow(getWindow(lines, currentIndex - 1, windowSize))
 
     if (!currentDepth || !previousDepth) {
       throw Error('Could not parse the input file!')
@@ -41,6 +42,20 @@ export function calculateNumberOfDepthIncreases(depthMeasurements: string[], win
   return numberOfDepthIncreases
 }
 
+function getWindow(measurements: string[], startIndex: number, windowSize: number): string[] {
+  return measurements.slice(startIndex, startIndex + windowSize)
+}
+
+function calculateSumForWindow(measurements: string[]): number {
+  return measurements
+    .map((measurement) => parseInt(measurement))
+    .reduce((previousValue, currentValue) => previousValue + currentValue)
+}
+
 const input = readInput('day1/input.txt')
-const numberOfDepthIncreases = calculateNumberOfDepthIncreases(input)
-console.log('Number of depth increases: %d', numberOfDepthIncreases)
+
+const numDepthIncreasesWindowSize1 = calculateNumberOfDepthIncreases(input)
+console.log('Number of depth increases with windows size of 1: %d', numDepthIncreasesWindowSize1)
+
+const numDepthIncreasesWindowSize3 = calculateNumberOfDepthIncreases(input, 3)
+console.log('Number of depth increases with windows size of 3: %d', numDepthIncreasesWindowSize3)
